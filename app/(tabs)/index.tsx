@@ -4,6 +4,8 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { Box } from "@/components/ui/box";
+import { Text } from "@/components/ui/text";
 
 export default function HomeScreen() {
   return (
@@ -38,6 +40,13 @@ export default function HomeScreen() {
           Tap the Explore tab to learn more about what's included in this
           starter app.
         </ThemedText>
+
+        <Box
+          className="bg-primary-500 p-5"
+          style={{ flex: 1, backgroundColor: "plum" }}
+        >
+          <Text className="text-typography-0">This is the Box</Text>
+        </Box>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get fucked</ThemedText>
