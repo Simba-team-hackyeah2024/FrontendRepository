@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, TextComponent, View } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextBase,
+  TextComponent,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function app() {
@@ -17,7 +24,11 @@ export default function app() {
   };
   return (
     <SafeAreaView style={styles.stepContainer}>
-      <Text numberOfLines={x} onPress={handlePress}>
+      <Text
+        style={{ fontSize: 25, fontWeight: "bold" }}
+        numberOfLines={x}
+        onPress={handlePress}
+      >
         Hello React. We're pushing the limits of this display and are in neeed
         of a new line!
       </Text>
