@@ -27,7 +27,7 @@ export default function Selflect() {
                                 <Sets select={handleSetChoice} />
                         }
                         {phase === Phase.AnswerQuestions &&
-                                <Questions />
+                                <Questions endFunction={() => setPhase(Phase.ChooseSet)} />
                         }
                 </View>
         );
