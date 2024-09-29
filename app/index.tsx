@@ -9,6 +9,7 @@ enum Phase {
         ProfileSettings = 2,
         Statistics = 3,
         Notes = 4,
+        ChangeSet = 5,
 }
 
 const USER_ID = 1       //hardcoded for now

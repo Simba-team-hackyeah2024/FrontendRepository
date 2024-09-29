@@ -1,6 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import axios from "axios";
+import Icon from "react-native-vector-icons/FontAwesome";
+
+const mockQuestions = [
+        { question: "Am I proud of what I achieved today?" },
+        { question: "Did I express gratitude today?" },
+        { question: "Did I take care of my physical well-being?" },
+        { question: "Do I feel closer to achieving my goals?" },
+        { question: "Have I tried something new today?" },
+        { question: "Am I closer to dropping any of my bad habits?" },
+        { question: "Am I satisfied with my overall progress?" },
+        { question: "Do I feel satisfaction with my progress?" },
+        { question: "Am I happy with how I handled today's annoyances?" },
+        { question: "Am i being honest with myself" }
+];
 
 const icons = [
         <Image
@@ -30,44 +43,12 @@ const icons = [
         />,
 ];
 
-
 interface questionsProps {
-        endFunction: () => void,
-        userId: number,
-        setId: number
+        endFunction: () => void
 }
 
 export const Questions = (props: questionsProps) => {
         const [selectedQuestion, setSelectedQuestion] = useState<number>(0)
-        const [questions, setQuestions] = useState<any[]>([])
-        const [error, setError] = useState<unknown>(null)
-        const [loading, setLoading] = useState<boolean>(true)
-
-        const getQuestions = async (userId: number = props.userId, setId: number = props.setId) => {
-                try {
-                            const res = await axios.get(`http://localhost:8080/questions/fromSet/${userId}/${setId}`);
-                            console.log(res.data);
-                            if (res.data && res.data.length > 0) {
-                                setQuestions(res.data);
-                            } else {
-                                setQuestions([]);
-                            }
-                            setLoading(false); // Set loading to false after fetching data
-                        } catch (err) {
-                            console.log(err);
-                            setError(err); // Set error if request fails
-                            setLoading(false); // Set loading to false even if there is an error
-                        }
-        }
-
-
-        useEffect(() => {
-                getQuestions()
-        }, [])
-
-        useEffect(() => {
-                console.log(questions)
-        }, [questions])
 
         return (
                 <View
@@ -91,16 +72,14 @@ export const Questions = (props: questionsProps) => {
                                         borderRadius: 20,
                                 }}
                         >
-                                {(!loading && questions.length > 0) &&
-                                        <Text
-                                                style={{
-                                                        fontSize: 20,
-                                                        textAlign: "center",
-                                                }}
-                                        >
-                                                {questions[selectedQuestion].question}
-                                        </Text>
-                                }
+                                <Text
+                                        style={{
+                                                fontSize: 20,
+                                                textAlign: "center",
+                                        }}
+                                >
+                                        {mockQuestions[selectedQuestion].question}
+                                </Text>
                         </View>
                         <View
                                 style={{
@@ -120,7 +99,7 @@ export const Questions = (props: questionsProps) => {
                                 {icons.map((icon: JSX.Element, index: number) => (
                                         <TouchableOpacity key={index}
                                                 onPress={() => {
-                                                        if (selectedQuestion === questions.length - 1) {
+                                                        if (selectedQuestion === mockQuestions.length - 1) {
                                                                 //maybe some finish screen to add later
                                                                 props.endFunction()
                                                         }
