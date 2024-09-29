@@ -43,14 +43,21 @@ export const Questions = (props: questionsProps) => {
         const [error, setError] = useState<unknown>(null)
         const [loading, setLoading] = useState<boolean>(true)
 
-        const getQuestions = (userId: number = props.userId, setId: number = props.setId) => {
-                axios.get(`http://localhost:8080/questions/fromSet/${userId}/${setId}`)
-                        .then(res => {
-                                console.log(res.data)
-                                setQuestions(res.data)
-                        }).catch(err => {
-                                console.log(err)
-                        })
+        const getQuestions = async (userId: number = props.userId, setId: number = props.setId) => {
+                try {
+                            const res = await axios.get(`http://localhost:8080/questions/fromSet/${userId}/${setId}`);
+                            console.log(res.data);
+                            if (res.data && res.data.length > 0) {
+                                setQuestions(res.data);
+                            } else {
+                                setQuestions([]);
+                            }
+                            setLoading(false); // Set loading to false after fetching data
+                        } catch (err) {
+                            console.log(err);
+                            setError(err); // Set error if request fails
+                            setLoading(false); // Set loading to false even if there is an error
+                        }
         }
 
 
