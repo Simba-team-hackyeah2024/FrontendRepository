@@ -11,14 +11,20 @@ enum Phase {
         Notes = 4,
 }
 
+
 export default function Selflect() {
         const [phase, setPhase] = useState<Phase>(Phase.ChooseSet)
         const [selectedSet, setSelectedSet] = useState<number | null>(null)
 
+        const handleSetChoice = (selected: number) => {
+                setSelectedSet(selected)
+                setPhase(Phase.AnswerQuestions)
+        }
+
         return (
                 <View>
                         {phase === Phase.ChooseSet &&
-                                <Sets />
+                                <Sets select={handleSetChoice} />
                         }
                         {phase === Phase.AnswerQuestions &&
                                 <Questions />
