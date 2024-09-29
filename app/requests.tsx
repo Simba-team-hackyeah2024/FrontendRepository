@@ -12,16 +12,6 @@ export const getUserSets = async (userId: number) => {
         }
 }
 
-export const getQuestionsFromSet = async (setId: number) => {
-        try {
-                const response = await axios.get(`${API_URL}/questions/fromSet/${setId}`)
-                return response.data
-        }
-        catch (err) {
-                throw err;
-        }
-}
-
 export const getAllSets = async () => {
         try {
                 const response = await axios.get(`${API_URL}/questions/all`)

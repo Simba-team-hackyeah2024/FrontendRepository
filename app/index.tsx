@@ -11,6 +11,7 @@ enum Phase {
         Notes = 4,
 }
 
+const USER_ID = 1       //hardcoded for now
 
 export default function Selflect() {
         const [phase, setPhase] = useState<Phase>(Phase.ChooseSet)
@@ -27,7 +28,7 @@ export default function Selflect() {
                                 <Sets select={handleSetChoice} />
                         }
                         {phase === Phase.AnswerQuestions &&
-                                <Questions endFunction={() => setPhase(Phase.ChooseSet)} />
+                                <Questions endFunction={() => setPhase(Phase.ChooseSet)} userId={1} setId={1} />
                         }
                 </View>
         );

@@ -1,24 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-
-const mockQuestions = [
-        {
-                question: 'Why?',
-        },
-        {
-                question: 'Why?',
-        },
-        {
-                question: 'Why?',
-        },
-        {
-                question: 'Why?',
-        },
-        {
-                question: 'Why not?',
-        },
-];
+import axios from "axios";
 
 const icons = [
         <Image
@@ -48,12 +30,37 @@ const icons = [
         />,
 ];
 
+
 interface questionsProps {
-        endFunction: () => void
+        endFunction: () => void,
+        userId: number,
+        setId: number
 }
 
 export const Questions = (props: questionsProps) => {
         const [selectedQuestion, setSelectedQuestion] = useState<number>(0)
+        const [questions, setQuestions] = useState<any[]>([])
+        const [error, setError] = useState<unknown>(null)
+        const [loading, setLoading] = useState<boolean>(true)
+
+        const getQuestions = (userId: number = props.userId, setId: number = props.setId) => {
+                axios.get(`http://localhost:8080/questions/fromSet/${userId}/${setId}`)
+                        .then(res => {
+                                console.log(res.data)
+                                setQuestions(res.data)
+                        }).catch(err => {
+                                console.log(err)
+                        })
+        }
+
+
+        useEffect(() => {
+                getQuestions()
+        }, [])
+
+        useEffect(() => {
+                console.log(questions)
+        }, [questions])
 
         return (
                 <View
@@ -77,14 +84,16 @@ export const Questions = (props: questionsProps) => {
                                         borderRadius: 20,
                                 }}
                         >
-                                <Text
-                                        style={{
-                                                fontSize: 20,
-                                                textAlign: "center",
-                                        }}
-                                >
-                                        {mockQuestions[selectedQuestion].question}
-                                </Text>
+                                {(!loading && questions.length > 0) &&
+                                        <Text
+                                                style={{
+                                                        fontSize: 20,
+                                                        textAlign: "center",
+                                                }}
+                                        >
+                                                {questions[selectedQuestion].question}
+                                        </Text>
+                                }
                         </View>
                         <View
                                 style={{
@@ -104,7 +113,7 @@ export const Questions = (props: questionsProps) => {
                                 {icons.map((icon: JSX.Element, index: number) => (
                                         <TouchableOpacity key={index}
                                                 onPress={() => {
-                                                        if (selectedQuestion === mockQuestions.length - 1) {
+                                                        if (selectedQuestion === questions.length - 1) {
                                                                 //maybe some finish screen to add later
                                                                 props.endFunction()
                                                         }
