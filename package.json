@@ -1,5 +1,6 @@
 {
   "name": "helloworld",
+  "homepage": "https://simba-team-hackyeah2024.github.io/FrontendRepository/",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {

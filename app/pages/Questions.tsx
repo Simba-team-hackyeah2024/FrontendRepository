@@ -19,27 +19,27 @@ const icons = [
         <Image
                 key="verybad"
                 source={require('../../assets/images/verybad.png')}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
         />,
         <Image
                 key="bad"
                 source={require('../../assets/images/bad.png')}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
         />,
         <Image
                 key="mid"
                 source={require('../../assets/images/mid.png')}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
         />,
         <Image
                 key="good"
                 source={require('../../assets/images/good.png')}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
         />,
         <Image
                 key="verygood"
                 source={require('../../assets/images/verygood.png')}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
         />,
 ];
 
@@ -86,9 +86,8 @@ export const Questions = (props: questionsProps) => {
                                         width: "100%",
                                         display: "flex",
                                         flexDirection: "row",
-                                        justifyContent: "space-between",
+                                        justifyContent: "space-around",
                                         marginTop: 20,
-                                        gap: 10,
                                         borderStyle: "solid",
                                         padding: 20,
                                         borderWidth: 1,
